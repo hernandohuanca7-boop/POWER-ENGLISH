@@ -33,14 +33,22 @@
         }
 
         recognition.onresult = (event) => {
-            const transcript = event.results[0][0].transcript.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"");
+            // Captura lo que dijiste
+            const transcript = event.results[0][0].transcript.toLowerCase().trim().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"");
+            // La frase que deberías decir
+            const target = "hello how are you today"; 
+            
             const resultElement = document.getElementById('result');
             
-            if (transcript.includes(target) || target.includes(transcript)) {
-                resultElement.innerHTML = "✅ ¡Excelente pronunciación!";
+            // Comparamos si son idénticas o muy parecidas
+            if (transcript === target) {
+                resultElement.innerHTML = "✅ ¡Excelente! Lo dijiste perfecto.";
                 resultElement.style.color = "green";
+            } else if (transcript.length > 5 && target.includes(transcript)) {
+                resultElement.innerHTML = `⚠️ Casi bien. Dijiste: "${transcript}". <br> Intenta pronunciar todas las palabras.`;
+                resultElement.style.color = "orange";
             } else {
-                resultElement.innerHTML = `❌ Te escuché decir: "${transcript}". <br> Intenta de nuevo.`;
+                resultElement.innerHTML = `❌ No suena correcto. <br> Escuché: "${transcript}". <br> ¡Intenta de nuevo!`;
                 resultElement.style.color = "red";
             }
         };
