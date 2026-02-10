@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corrector de Inglés</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; background-color: #f4f4f9; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        button { background-color: #007bff; color: white; border: none; padding: 15px 30px; border-radius: 50px; font-size: 18px; cursor: pointer; }
+        button:active { background-color: #0056b3; }
+        #result { margin-top: 20px; font-weight: bold; font-size: 1.2em; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Unidad 1: Saludos</h2>
+        <p>Lee la siguiente frase en voz alta:</p>
+        <h3 id="targetText" style="color: #333;">Hello, how are you today?</h3>
+        
+        <button onclick="record()">🎤 Presionar y Hablar</button>
+        <p id="result">Haz clic para empezar...</p>
+    </div>
+
+    <script>
+        const target = "hello how are you today"; // Frase sin signos para comparar mejor
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'en-US';
+
+        function record() {
+            recognition.start();
+            document.getElementById('result').innerText = "Escuchando... habla ahora";
+        }
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"");
+            const resultElement = document.getElementById('result');
+            
+            if (transcript.includes(target) || target.includes(transcript)) {
+                resultElement.innerHTML = "✅ ¡Excelente pronunciación!";
+                resultElement.style.color = "green";
+            } else {
+                resultElement.innerHTML = `❌ Te escuché decir: "${transcript}". <br> Intenta de nuevo.`;
+                resultElement.style.color = "red";
+            }
+        };
+    </script>
+</body>
+</html>
