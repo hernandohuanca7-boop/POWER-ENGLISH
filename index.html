@@ -16,14 +16,14 @@
     <div class="card">
         <h2>Unidad 1: Saludos</h2>
         <p>Lee la siguiente frase en voz alta:</p>
-        <h3 id="targetText" style="color: #333;">Erlan enjoys reading. He likes to read in the park. He likes to read in the library. He even likes to read in the bathroom. He doesn´t like the days without reading. As you can see, reading is a very important part of Erlan´s life</h3>
+        <h3 id="targetText" style="color: #333;">Mike enjoys reading. He likes to read in the park. He likes to read in the library. He even likes to read in the bathroom. He doesn´t like the days without reading. As you can see, reading is a very important part of Mike´s life</h3>
         
         <button onclick="record()">🎤 Presionar y Hablar</button>
         <p id="result">Haz clic para empezar...</p>
     </div>
 
     <script>
-        const target = "Erlan enjoys reading. He likes to read in the park. He likes to read in the library. He even likes to read in the bathroom. He doesn´t like the days without reading. As you can see, reading is a very important part of Erlan´s life"; // Frase sin signos para comparar mejor
+        const target = "Mike enjoys reading. He likes to read in the park. He likes to read in the library. He even likes to read in the bathroom. He doesn´t like the days without reading. As you can see, reading is a very important part of Mike´s life"; // Frase sin signos para comparar mejor
         const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         recognition.lang = 'en-US';
 
@@ -36,7 +36,7 @@
             // Captura lo que dijiste
             const transcript = event.results[0][0].transcript.toLowerCase().trim().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"");
             // La frase que deberías decir
-            const target = "Erlan enjoys reading. He likes to read in the park. He likes to read in the library. He even likes to read in the bathroom. He doesn´t like the days without reading. As you can see, reading is a very important part of Erlan´s life"; 
+            const target = "Mike enjoys reading. He likes to read in the park. He likes to read in the library. He even likes to read in the bathroom. He doesn´t like the days without reading. As you can see, reading is a very important part of Mike´s life"; 
             
             const resultElement = document.getElementById('result');
             
